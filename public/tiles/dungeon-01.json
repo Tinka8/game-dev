@@ -234,7 +234,7 @@
         {
          "columns":32,
          "firstgid":1,
-         "image":"dungeon_tiles.png",
+         "image":"..\/..\/tiles\/dungeon_tiles.png",
          "imageheight":512,
          "imagewidth":512,
          "margin":0,
@@ -2519,7 +2519,7 @@
                         {
                          "name":"collides",
                          "type":"bool",
-                         "value":false
+                         "value":true
                         }]
                 }, 
                 {
@@ -2528,7 +2528,7 @@
                         {
                          "name":"collides",
                          "type":"bool",
-                         "value":false
+                         "value":true
                         }]
                 }, 
                 {
