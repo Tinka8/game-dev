@@ -18,8 +18,9 @@ export default class Game extends Phaser.Scene {
     const tileset = map.addTilesetImage('dungeon', 'tiles', 16, 16)
 
     const wallsLayer = map.createLayer('Walls',(tileset as Phaser.Tilemaps.Tileset), 0, 0) as Phaser.Tilemaps.TilemapLayer
+    const groundLayer = map.createLayer("Ground", tileset as Phaser.Tilemaps.Tileset, 0, 0) as Phaser.Tilemaps.TilemapLayer;
 
-    wallsLayer.setCollisionByProperty({ collides: true})
+    wallsLayer.setCollisionByProperty({ collides: true })
 
     // debugDraw(wallsLayer, this)
 
@@ -33,12 +34,12 @@ export default class Game extends Phaser.Scene {
 
     this.anims.create({
       key: 'faune-idle-up',
-      frames: [{ key: 'faune', frame: 'run-up-1.png'}]
+      frames: [{ key: 'faune', frame: 'walk-up-lift-3.png'}]
     })
 
     this.anims.create({
       key: 'faune-idle-side',
-      frames: [{ key: 'faune', frame: 'run-side-1.png'}]
+      frames: [{ key: 'faune', frame: 'run-side-3.png'}]
     })
 
     this.anims.create({
