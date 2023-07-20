@@ -1,5 +1,7 @@
 import Phaser from 'phaser'
 
+import { debugDraw } from '../utils/debug'
+
 export default class Game extends Phaser.Scene {
   private cursors!: Phaser.Types.Input.Keyboard.CursorKeys
   private faune!: Phaser.Physics.Arcade.Sprite
@@ -13,21 +15,16 @@ export default class Game extends Phaser.Scene {
 
   create() {
     const map = this.make.tilemap({ key: 'dungeon' })
-    const tileset = map.addTilesetImage('dungeon', 'tiles')
+    const tileset = map.addTilesetImage('dungeon', 'tiles', 16, 16)
 
     const wallsLayer = map.createLayer('Walls',(tileset as Phaser.Tilemaps.Tileset), 0, 0) as Phaser.Tilemaps.TilemapLayer
 
     wallsLayer.setCollisionByProperty({ collides: true})
-    
-    const debugGraphics = this.add.graphics().setAlpha(0.7)
-    wallsLayer.renderDebug(debugGraphics, {
-      tileColor: null,
-      collidingTileColor: new Phaser.Display.Color(243, 234, 48, 255),
-      faceColor: new Phaser.Display.Color(40, 39, 37, 255)
-    })
+
+    // debugDraw(wallsLayer, this)
 
     this.faune = this.physics.add.sprite(128, 128, 'faune', 'walk-down-3.png')
-
+    this.faune.body?.setSize(this.faune.width * 0.5, this.faune.height * 0.8)
 
     this.anims.create({
       key: 'faune-idle-down',
@@ -65,11 +62,12 @@ export default class Game extends Phaser.Scene {
       frameRate: 15,
     })
 
-
     this.faune.anims.play('faune-idle-down')
 
-  }
+    this.physics.add.collider(this.faune, wallsLayer)
 
+    this.cameras.main.startFollow(this.faune, true)
+  }
 
   update(t: number, dt: number) {
     if (!this.cursors || !this.faune) {
@@ -82,6 +80,7 @@ export default class Game extends Phaser.Scene {
       this.faune.setVelocity(-speed, 0)
 
       this.faune.scaleX = - 1
+      this.faune.body.offset.x = 24
     }
 
     else if (this.cursors.right?.isDown) {
@@ -89,6 +88,7 @@ export default class Game extends Phaser.Scene {
       this.faune.setVelocity(speed, 0)
 
       this.faune.scaleX = 1
+      this.faune.body.offset.x = 8
     }
 
     else if (this.cursors.up?.isDown) {
@@ -103,7 +103,9 @@ export default class Game extends Phaser.Scene {
     }
 
     else {
-      this.faune.play('faune-idle-down')
+      const parts = this.faune.anims.currentAnim.key.split('-')
+      parts[1] = 'idle'
+      this.faune.play(parts.join('-'))
       this.faune.setVelocity(0, 0)
     }
   }
