@@ -1,19 +1,17 @@
 import Phaser from 'phaser'
 
-export default class Game extends Phaser.Scene
-{
-	constructor()
-	{
+export default class Game extends Phaser.Scene {
+  private cursors!: Phaser.Types.Input.Keyboard.CursorKeys
+  private faune!: Phaser.Physics.Arcade.Sprite
+	constructor() {
 		super('game')
 	}
 
-	preload()
-  {
-
+	preload() {
+    this.cursors = this.input.keyboard.createCursorKeys()
   }
 
-  create()
-  {
+  create() {
     const map = this.make.tilemap({ key: 'dungeon' })
     const tileset = map.addTilesetImage('dungeon', 'tiles')
 
@@ -28,6 +26,85 @@ export default class Game extends Phaser.Scene
       faceColor: new Phaser.Display.Color(40, 39, 37, 255)
     })
 
+    this.faune = this.physics.add.sprite(128, 128, 'faune', 'walk-down-3.png')
+
+
+    this.anims.create({
+      key: 'faune-idle-down',
+      frames: [{ key: 'faune', frame: 'walk-down-3.png'}]
+    })
+
+    this.anims.create({
+      key: 'faune-idle-up',
+      frames: [{ key: 'faune', frame: 'run-up-1.png'}]
+    })
+
+    this.anims.create({
+      key: 'faune-idle-side',
+      frames: [{ key: 'faune', frame: 'run-side-1.png'}]
+    })
+
+    this.anims.create({
+      key: 'faune-run-down',
+      frames: this.anims.generateFrameNames('faune', { start: 1, end: 8, prefix: 'run-down-', suffix: '.png'}),
+      repeat: -1,
+      frameRate: 15,
+    })
+
+    this.anims.create({
+      key: 'faune-run-up',
+      frames: this.anims.generateFrameNames('faune', { start: 1, end: 8, prefix: 'run-up-', suffix: '.png'}),
+      repeat: -1,
+      frameRate: 15,
+    })
+
+    this.anims.create({
+      key: 'faune-run-side',
+      frames: this.anims.generateFrameNames('faune', { start: 1, end: 8, prefix: 'run-side-', suffix: '.png'}),
+      repeat: -1,
+      frameRate: 15,
+    })
+
+
+    this.faune.anims.play('faune-idle-down')
+
   }
 
+
+  update(t: number, dt: number) {
+    if (!this.cursors || !this.faune) {
+      return
+    }
+
+    const speed = 100
+    if (this.cursors.left?.isDown) {
+      this.faune.anims.play('faune-run-side', true)
+      this.faune.setVelocity(-speed, 0)
+
+      this.faune.scaleX = - 1
+    }
+
+    else if (this.cursors.right?.isDown) {
+      this.faune.anims.play('faune-run-side', true)
+      this.faune.setVelocity(speed, 0)
+
+      this.faune.scaleX = 1
+    }
+
+    else if (this.cursors.up?.isDown) {
+      this.faune.anims.play('faune-run-up', true)
+      this.faune.setVelocity(0, -speed)
+    }
+
+    else if (this.cursors.down?.isDown) {
+      this.faune.anims.play('faune-run-down', true)
+      this.faune.setVelocity(0, speed)
+    
+    }
+
+    else {
+      this.faune.play('faune-idle-down')
+      this.faune.setVelocity(0, 0)
+    }
+  }
 }
