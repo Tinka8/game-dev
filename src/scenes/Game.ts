@@ -16,6 +16,10 @@ export default class Game extends Phaser.Scene {
   private cursors!: Phaser.Types.Input.Keyboard.CursorKeys
   private faune!: Faune
 
+  private knives!: Phaser.Physics.Arcade.Group
+
+  private playerLizardsCollider?: Phaser.Physics.Arcade.Collider
+
 	constructor() {
 		super('game')
 	}
@@ -38,16 +42,12 @@ export default class Game extends Phaser.Scene {
 
     wallsLayer.setCollisionByProperty({ collides: true })
 
-    // debugDraw(wallsLayer, this)
-
     this.faune = this.add.faune(128, 128, 'faune')
-    // this.faune = this.physics.add.sprite(128, 128, 'faune', 'walk-down-3.png')
-    // this.faune.body?.setSize(this.faune.width * 0.5, this.faune.height * 0.8)
-    // this.faune.anims.play('faune-idle-down')
-
+    this.faune.setKnives(this.knives)
+  
     this.cameras.main.startFollow(this.faune, true)
 
-    const lizards = this.physics.add.group({
+  const lizards = this.physics.add.group({
       classType: Lizard,
       createCallback: (go) => {
         const lizGo = go as Lizard
@@ -62,6 +62,13 @@ export default class Game extends Phaser.Scene {
 
     this.physics.add.collider(lizards, this.faune, this.handlePlayerLizzardCollision, undefined, this)
   }
+
+
+  private handleKnifeWallCollision(obj1: Phaser.GameObjects.GameObject, obj2: Phaser.GameObjects.GameObject) {
+		this.knives.killAndHide(obj1)
+	}
+
+
 
   private handlePlayerLizzardCollision(obj1: Phaser.GameObjects.GameObject, obj2: Phaser.GameObjects.GameObject) {
     const lizard = obj2 as Lizard
