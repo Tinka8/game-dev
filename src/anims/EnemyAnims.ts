@@ -1,4 +1,4 @@
-import Phaser from "phaser"
+import Phaser from 'phaser'
 
 const createLizzardAnims = (anims: Phaser.Animations.AnimationManager) => {
     anims.create({

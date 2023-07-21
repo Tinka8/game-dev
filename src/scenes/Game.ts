@@ -9,6 +9,8 @@ import Lizard from '../enemies/Lizard'
 import '../characters/Faune'
 import Faune from '../characters/Faune'
 
+import { sceneEvents } from '../events/EventCenter'
+
 export default class Game extends Phaser.Scene {
   private cursors!: Phaser.Types.Input.Keyboard.CursorKeys
   private faune!: Faune
@@ -22,6 +24,8 @@ export default class Game extends Phaser.Scene {
   }
 
   create() {
+    this.scene.run('game-ui')
+
     createCharacterAnims(this.anims)
     createLizzardAnims(this.anims)
 
@@ -56,7 +60,7 @@ export default class Game extends Phaser.Scene {
     this.physics.add.collider(lizards, wallsLayer)
 
     this.physics.add.collider(lizards, this.faune, this.handlePlayerLizzardCollision, undefined, this)
-}
+  }
 
   private handlePlayerLizzardCollision(obj1: Phaser.GameObjects.GameObject, obj2: Phaser.GameObjects.GameObject) {
     const lizard = obj2 as Lizard
@@ -67,6 +71,8 @@ export default class Game extends Phaser.Scene {
     const dir = new Phaser.Math.Vector2(dx, dy).normalize().scale(200)
 
     this.faune.handleDamage(dir)
+
+    sceneEvents.emit('player-health-changed', this.faune.health)
   }
 
   update(t: number, dt: number) {
