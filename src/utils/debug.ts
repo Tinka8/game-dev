@@ -10,5 +10,5 @@ const debugDraw = (layer: Phaser.Tilemaps.TilemapLayer, scene: Phaser.Scene) => 
 }
 
 export {
-    debugDraw
+  debugDraw
 }
