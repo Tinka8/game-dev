@@ -2,14 +2,15 @@ import Phaser from 'phaser'
 
 import { debugDraw } from '../utils/debug'
 import { createLizzardAnims } from '../anims/EnemyAnims'
-import { createCharacterAnims} from '../anims/CharacterAnims'
+import { createCharacterAnims } from '../anims/CharacterAnims'
 
 import Lizard from '../enemies/Lizard'
 
 import '../characters/Faune'
 import Faune from '../characters/Faune'
 
-import { sceneEvents } from '../events/EventCenter'
+import { sceneEvents } from '../events/EventsCenter'
+
 
 export default class Game extends Phaser.Scene {
   private cursors!: Phaser.Types.Input.Keyboard.CursorKeys
