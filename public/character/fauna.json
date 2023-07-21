@@ -696,33 +696,9 @@
         "y": 0.5
       }
     },
-    "faint-3.png": {
-      "frame": {
-        "x": 35,
-        "y": 63,
-        "w": 21,
-        "h": 15
-      },
-      "rotated": true,
-      "trimmed": true,
-      "spriteSourceSize": {
-        "x": 9,
-        "y": 14,
-        "w": 21,
-        "h": 15
-      },
-      "sourceSize": {
-        "w": 32,
-        "h": 32
-      },
-      "pivot": {
-        "x": 0.5,
-        "y": 0.5
-      }
-    },
     "run-down-7.png": {
       "frame": {
-        "x": 50,
+        "x": 35,
         "y": 63,
         "w": 17,
         "h": 20
@@ -864,33 +840,9 @@
         "y": 0.5
       }
     },
-    "faint-4.png": {
-      "frame": {
-        "x": 51,
-        "y": 40,
-        "w": 20,
-        "h": 15
-      },
-      "rotated": true,
-      "trimmed": true,
-      "spriteSourceSize": {
-        "x": 9,
-        "y": 14,
-        "w": 20,
-        "h": 15
-      },
-      "sourceSize": {
-        "w": 32,
-        "h": 32
-      },
-      "pivot": {
-        "x": 0.5,
-        "y": 0.5
-      }
-    },
     "push-down.png": {
       "frame": {
-        "x": 66,
+        "x": 51,
         "y": 40,
         "w": 16,
         "h": 19
@@ -914,8 +866,8 @@
     },
     "push-up.png": {
       "frame": {
-        "x": 67,
-        "y": 0,
+        "x": 52,
+        "y": 59,
         "w": 16,
         "h": 19
       },
@@ -935,6 +887,54 @@
         "x": 0.5,
         "y": 0.5
       }
+    },
+    "faint-3.png": {
+      "frame": {
+        "x": 67,
+        "y": 78,
+        "w": 21,
+        "h": 15
+      },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": {
+        "x": 9,
+        "y": 14,
+        "w": 21,
+        "h": 15
+      },
+      "sourceSize": {
+        "w": 32,
+        "h": 32
+      },
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    },
+    "faint-4.png": {
+      "frame": {
+        "x": 83,
+        "y": 93,
+        "w": 20,
+        "h": 15
+      },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": {
+        "x": 9,
+        "y": 14,
+        "w": 20,
+        "h": 15
+      },
+      "sourceSize": {
+        "w": 32,
+        "h": 32
+      },
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      }
     }
   },
   "meta": {
@@ -943,7 +943,7 @@
     "image": "fauna.png",
     "format": "RGBA8888",
     "size": {
-      "w": 85,
+      "w": 103,
       "h": 219
     },
     "scale": 1

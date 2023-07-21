@@ -94,7 +94,7 @@ export default class Faune extends Phaser.Physics.Arcade.Sprite {
         const speed = 100
 
         if  (cursors.left?.isDown) {
-            this.anims.play('this-run-side', true)
+            this.anims.play('faune-run-side', true)
             this.setVelocity(-speed, 0)
 
             this.scaleX = - 1
@@ -102,7 +102,7 @@ export default class Faune extends Phaser.Physics.Arcade.Sprite {
         }
 
         else if (cursors.right?.isDown) {
-            this.anims.play('this-run-side', true)
+            this.anims.play('faune-run-side', true)
             this.setVelocity(speed, 0)
 
             this.scaleX = 1
@@ -110,12 +110,12 @@ export default class Faune extends Phaser.Physics.Arcade.Sprite {
         }
 
         else if (cursors.up?.isDown) {
-            this.anims.play('this-run-up', true)
+            this.anims.play('faune-run-up', true)
             this.setVelocity(0, -speed)
         }
 
         else if (cursors.down?.isDown) {
-            this.anims.play('this-run-down', true)
+            this.anims.play('faune-run-down', true)
             this.setVelocity(0, speed)  
         }
 
