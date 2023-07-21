@@ -1,6 +1,7 @@
 import Phaser from 'phaser'
 
 import { debugDraw } from '../utils/debug'
+import { createLizzardAnims } from '../anims/EnemyAnims'
 
 export default class Game extends Phaser.Scene {
   private cursors!: Phaser.Types.Input.Keyboard.CursorKeys
@@ -68,6 +69,12 @@ export default class Game extends Phaser.Scene {
     this.physics.add.collider(this.faune, wallsLayer)
 
     this.cameras.main.startFollow(this.faune, true)
+
+    const lizard = this.physics.add.sprite(256, 128, 'lizard', 'lizard_m_idle_anim_f0.png')
+
+    createLizzardAnims(this.anims)
+
+    lizard.anims.play('lizard-run')
   }
 
   update(t: number, dt: number) {
