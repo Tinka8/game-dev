@@ -9,6 +9,9 @@ import Lizard from '../enemies/Lizard'
 export default class Game extends Phaser.Scene {
   private cursors!: Phaser.Types.Input.Keyboard.CursorKeys
   private faune!: Phaser.Physics.Arcade.Sprite
+
+  private hit = 0
+
 	constructor() {
 		super('game')
 	}
@@ -50,9 +53,33 @@ export default class Game extends Phaser.Scene {
 
     this.physics.add.collider(this.faune, wallsLayer)
     this.physics.add.collider(lizards, wallsLayer)
+
+    this.physics.add.collider(lizards, this.faune, this.handlePlayerLizzardCollision, undefined, this)
 }
 
+  private handlePlayerLizzardCollision(obj1: Phaser.GameObjects.GameObject, obj2: Phaser.GameObjects.GameObject) {
+    const lizard = obj2 as Lizard
+
+    const dx = this.faune.x - lizard.x
+    const dy = this.faune.y - lizard.y
+
+    const dir = new Phaser.Math.Vector2(dx, dy).normalize().scale(200)
+
+    this.faune.setVelocity(dir.x, dir.y)
+
+    this.hit = 1
+  }
+
   update(t: number, dt: number) {
+    if (this.hit > 0) {
+      ++this.hit
+      if (this.hit > 10) {
+        this.hit = 0
+      }
+    }
+
+
+
     if (!this.cursors || !this.faune) {
       return
     }
