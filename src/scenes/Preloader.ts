@@ -1,14 +1,11 @@
 import Phaser from 'phaser'
 
-export default class Preloader extends Phaser.Scene
-{
-    constructor()
-    {
+export default class Preloader extends Phaser.Scene {
+    constructor() {
         super('preloader')
     }
 
-    preload()
-    {
+    preload() {
         this.load.image('tiles', 'tiles/dungeon_tiles_extruded.png')
         this.load.tilemapTiledJSON('dungeon', 'tiles/dungeon-01.json')
 
@@ -16,8 +13,7 @@ export default class Preloader extends Phaser.Scene
         this.load.atlas('lizard', 'enemies/lizard.png', 'enemies/lizard.json')
     }
 
-    create() 
-    {
+    create() {
         this.scene.start('game')
     }
 }
