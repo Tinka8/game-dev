@@ -1,5 +1,5 @@
 import Phaser from 'phaser'
-import Chest from '../items'
+import Chest from '../items/Chest'
 
 import { sceneEvents } from '../events/EventsCenter'
 
