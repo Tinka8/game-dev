@@ -17,5 +17,5 @@ const createLizzardAnims = (anims: Phaser.Animations.AnimationManager) => {
 }
 
 export {
-    createLizzardAnims
+  createLizzardAnims
 }
