@@ -1,4 +1,5 @@
 import Phaser from 'phaser'
+import Chest from '../items'
 
 import { sceneEvents } from '../events/EventsCenter'
 
@@ -21,9 +22,11 @@ export default class Faune extends Phaser.Physics.Arcade.Sprite {
     private healthState = HealthState.IDLE
     private damageTime = 0
 
-    private _health = 3
+	private _health = 3
+	private _coins = 0
 
-    private knives?: Phaser.Physics.Arcade.Group
+	private knives?: Phaser.Physics.Arcade.Group
+	private activeChest?: Chest
 
     get health() {
         return this._health
